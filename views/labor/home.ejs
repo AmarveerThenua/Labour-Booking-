@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Labor Dashboard - Labor Booking</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .labor-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin: 20px;
+            overflow: hidden;
+        }
+        
+        .labor-header {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .labor-content {
+            padding: 40px;
+        }
+        
+
+        
+        .stats-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            margin-bottom: 20px;
+            height: 100%;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        
+        .stats-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .stats-number {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .stats-label {
+            color: #6c757d;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+
+        
+        .section-title {
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .booking-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            border: none;
+            margin-bottom: 20px;
+            border-left: 4px solid #28a745;
+            transition: transform 0.3s ease;
+        }
+        
+        .booking-card:hover {
+            transform: translateX(5px);
+        }
+        
+        .booking-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .booking-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: #667eea;
+        }
+        
+        .booking-label {
+            font-weight: 600;
+            color: #495057;
+            min-width: 80px;
+        }
+        
+        .booking-value {
+            color: #6c757d;
+            flex: 1;
+        }
+        
+        .badge {
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-weight: 600;
+        }
+        
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        
+        .nav-link {
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        .profile-nav-img {
+            min-width: 32px;
+            min-height: 32px;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        .profile-nav-placeholder {
+            min-width: 32px;
+            min-height: 32px;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        .profile-name {
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 150px;
+        }
+        
+        .dropdown-menu {
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border: none;
+            padding: 8px 0;
+        }
+        
+        .dropdown-item {
+            padding: 10px 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .dropdown-item:hover {
+            background-color: #f8f9fa;
+            transform: translateX(5px);
+        }
+        
+        .welcome-text {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .labor-container {
+                margin: 10px;
+            }
+            .labor-header, .labor-content {
+                padding: 20px;
+            }
+            
+            /* Mobile navbar styling */
+            .navbar {
+                padding: 8px 0;
+            }
+            
+            .mobile-brand {
+                font-size: 1rem;
+                padding: 0;
+                margin: 0;
+            }
+            
+            .brand-text {
+                font-size: 0.9rem;
+            }
+            
+            .mobile-nav {
+                display: flex !important;
+                align-items: center;
+                gap: 8px;
+                flex-shrink: 0;
+            }
+            
+            .mobile-nav-link {
+                padding: 6px 8px !important;
+                white-space: nowrap;
+                font-size: 0.8rem;
+                margin: 0;
+            }
+            
+            .mobile-text {
+                font-size: 0.75rem;
+            }
+            
+            .profile-name {
+                max-width: 60px;
+                font-size: 0.7rem;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            
+            .profile-nav-img, .profile-nav-placeholder {
+                width: 24px !important;
+                height: 24px !important;
+                min-width: 24px;
+                min-height: 24px;
+            }
+            
+            .d-lg-none .dropdown {
+                position: relative;
+                z-index: 1000;
+            }
+            
+            /* Ensure container doesn't wrap */
+            .container-fluid {
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .brand-text {
+                font-size: 0.8rem;
+            }
+            
+            .mobile-text {
+                font-size: 0.7rem;
+            }
+            
+            .profile-name {
+                max-width: 50px;
+                font-size: 0.65rem;
+            }
+            
+            .mobile-nav-link {
+                padding: 4px 6px !important;
+                font-size: 0.75rem;
+            }
+            
+            .profile-nav-img, .profile-nav-placeholder {
+                width: 22px !important;
+                height: 22px !important;
+                min-width: 22px;
+                min-height: 22px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .profile-name {
+                max-width: 80px;
+                font-size: 0.8rem;
+            }
+            .profile-nav-img, .profile-nav-placeholder {
+                width: 24px !important;
+                height: 24px !important;
+                min-width: 24px;
+                min-height: 24px;
+            }
+            /* Mobile profile styling */
+            .d-lg-none .nav-link {
+                padding: 8px 12px;
+            }
+            .d-lg-none .dropdown-menu {
+                position: absolute;
+                right: 0;
+                left: auto;
+                min-width: 200px;
+            }
+        }
+        
+        @media (min-width: 1200px) {
+            .profile-nav-img, .profile-nav-placeholder {
+                width: 36px !important;
+                height: 36px !important;
+                min-width: 36px;
+                min-height: 36px;
+            }
+            .profile-name {
+                max-width: 200px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);">
+        <div class="container-fluid px-3">
+            <a class="navbar-brand mobile-brand" href="/labor/home">
+                <i class="bi bi-tools me-1"></i><span class="brand-text">Dashboard</span>
+            </a>
+            
+            <!-- Mobile Navigation - Always Visible -->
+            <div class="d-lg-none d-flex align-items-center mobile-nav">
+                <!-- Mobile Bookings Link -->
+                <a class="nav-link mobile-nav-link position-relative" href="/labor/requests">
+                    <i class="bi bi-calendar-check"></i><span class="mobile-text">Bookings</span>
+                    <% if (incomingRequests > 0) { %>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size:0.7rem;">
+                            <%= incomingRequests %>
+                        </span>
+                    <% } %>
+                </a>
+                
+                <!-- Mobile Profile Dropdown -->
+                <div class="dropdown">
+                    <a class="nav-link dropdown-toggle d-flex align-items-center mobile-nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <% if (labor.profileImage) { %>
+                            <img src="<%= labor.profileImage %>" alt="Profile" class="rounded-circle me-1 profile-nav-img" style="width: 28px; height: 28px; object-fit: cover;">
+                        <% } else { %>
+                            <div class="rounded-circle me-1 profile-nav-placeholder d-flex align-items-center justify-content-center" style="width: 28px; height: 28px; background: rgba(255,255,255,0.2);">
+                                <i class="bi bi-person text-white" style="font-size: 0.8rem;"></i>
+                            </div>
+                        <% } %>
+                        <span class="text-white profile-name mobile-text"><%= labor.user.name %></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <a class="dropdown-item" href="/labor/profile">
+                                <i class="bi bi-person-circle me-2"></i>Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/labor/dashboard">
+                                <i class="bi bi-gear me-2"></i>Settings
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item text-danger" href="/logout">
+                                <i class="bi bi-box-arrow-right me-2"></i>Logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Desktop Navigation -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link position-relative" href="/labor/requests">
+                            <i class="bi bi-calendar-check me-1"></i>Bookings
+                            <% if (incomingRequests > 0) { %>
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size:0.7rem;">
+                                    <%= incomingRequests %>
+                                </span>
+                            <% } %>
+                        </a>
+                    </li>
+                    <!-- Desktop Profile - Hidden on Mobile -->
+                    <li class="nav-item dropdown d-none d-lg-block">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <% if (labor.profileImage) { %>
+                                <img src="<%= labor.profileImage %>" alt="Profile" class="rounded-circle me-2 profile-nav-img" style="width: 32px; height: 32px; object-fit: cover;">
+                            <% } else { %>
+                                <div class="rounded-circle me-2 profile-nav-placeholder d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: rgba(255,255,255,0.2);">
+                                    <i class="bi bi-person text-white" style="font-size: 0.9rem;"></i>
+                                </div>
+                            <% } %>
+                            <span class="text-white profile-name"><%= labor.user.name %></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li>
+                                <a class="dropdown-item" href="/labor/profile">
+                                    <i class="bi bi-person-circle me-2"></i>Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="/labor/dashboard">
+                                    <i class="bi bi-gear me-2"></i>Settings
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item text-danger" href="/logout">
+                                    <i class="bi bi-box-arrow-right me-2"></i>Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="labor-container">
+        <!-- Labor Header -->
+        <div class="labor-header">
+            <h1 class="display-5 fw-bold mb-3">
+                <i class="bi bi-person-circle me-3"></i>Welcome, <%= labor.user.name %>! 👋
+            </h1>
+            <p class="lead mb-0">Keep your profile updated and stay available to get more bookings!</p>
+            <!-- DEBUG: Incoming Requests Count -->
+            <p class="text-white mt-2">DEBUG: Incoming Requests: <%= incomingRequests %></p>
+        </div>
+
+        <!-- Labor Content -->
+        <div class="labor-content">
+
+
+
+
+            <!-- Stats Cards -->
+            <div class="row g-4 mb-5">
+                <div class="col-md-3 col-sm-6">
+                    <div class="stats-card">
+                        <i class="bi bi-calendar-check stats-icon text-primary"></i>
+                        <div class="stats-number text-primary"><%= totalBookings %></div>
+                        <div class="stats-label">Total Bookings</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="stats-card">
+                        <i class="bi bi-calendar-week stats-icon text-success"></i>
+                        <div class="stats-number text-success"><%= weeklyBookings %></div>
+                        <div class="stats-label">This Week</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="stats-card">
+                        <i class="bi bi-clock stats-icon <%= labor.availability === 'Available' ? 'text-success' : 'text-danger' %>"></i>
+                        <div class="stats-number <%= labor.availability === 'Available' ? 'text-success' : 'text-danger' %>">
+                            <%= labor.availability %>
+                        </div>
+                        <div class="stats-label">Availability</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="stats-card">
+                        <i class="bi bi-currency-rupee stats-icon text-warning"></i>
+                        <div class="stats-number text-warning">₹<%= labor.dailyWage %></div>
+                        <div class="stats-label">Daily Wage</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upcoming Bookings -->
+            <div class="mb-4">
+                <h3 class="section-title">
+                    <i class="bi bi-calendar-event text-primary"></i>Upcoming Bookings
+                </h3>
+
+                <% if (upcomingBookings.length > 0) { %>
+                    <% upcomingBookings.forEach(booking => { %>
+                        <div class="booking-card">
+                            <div class="booking-info">
+                                <div class="booking-icon">
+                                    <i class="bi bi-person"></i>
+                                </div>
+                                <div class="booking-label">Customer:</div>
+                                <div class="booking-value"><strong><%= booking.user.name %></strong></div>
+                            </div>
+                            
+                            <div class="booking-info">
+                                <div class="booking-icon">
+                                    <i class="bi bi-telephone"></i>
+                                </div>
+                                <div class="booking-label">Mobile:</div>
+                                <div class="booking-value"><%= booking.user.mobile %></div>
+                            </div>
+                            
+                            <div class="booking-info">
+                                <div class="booking-icon">
+                                    <i class="bi bi-calendar"></i>
+                                </div>
+                                <div class="booking-label">Date:</div>
+                                <div class="booking-value"><%= new Date(booking.date).toLocaleDateString() %></div>
+                            </div>
+                            
+                            <div class="booking-info">
+                                <div class="booking-icon">
+                                    <i class="bi bi-flag"></i>
+                                </div>
+                                <div class="booking-label">Status:</div>
+                                <div class="booking-value">
+                                    <span class="badge <%= booking.status === 'Accepted' ? 'bg-success' : booking.status === 'Rejected' ? 'bg-danger' : 'bg-warning' %>">
+                                        <i class="bi <%= booking.status === 'Accepted' ? 'bi-check-circle' : booking.status === 'Rejected' ? 'bi-x-circle' : 'bi-clock' %> me-1"></i>
+                                        <%= booking.status %>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <div class="text-center py-5">
+                        <i class="bi bi-calendar-x text-muted" style="font-size: 3rem;"></i>
+                        <p class="text-muted mt-3">No upcoming bookings found.</p>
+                        <p class="text-muted small">Keep your profile updated to get more booking requests!</p>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<%- include('../partials/header') %>
+
+  <h2 class="mb-4">My Labor Requests</h2>
+
+  <% if (bookings.length===0) { %>
+    <p>No requests sent.</p>
+    <% } else { %>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Labor Name</th>
+            <th>Mobile Number</th>
+            <th>Area</th>
+            <th>Booking Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% bookings.forEach(b=> { %>
+            <tr>
+              <td>
+                <%= b.labor?.user?.name || 'N/A' %>
+              </td>
+              <td>
+                <%= b.labor?.user?.mobile || 'N/A' %>
+              </td>
+              <td>
+                <%= b.labor?.area || 'N/A' %>
+              </td>
+
+
+              <td>
+                <%= b.date.toLocaleDateString() %>
+              </td>
+              <td>
+                <span class="badge bg-<%= b.status === 'Pending' ? 'warning' : b.status === 'Accepted' ? 'success' : b.status === 'Completed' ? 'primary' : 'secondary' %>">
+                  <%= b.status %>
+                </span>
+                <% if (b.status === 'Completed' && !b.rated) { %>
+                  <form action="/rate/<%= b._id %>" method="POST" class="d-inline-block ms-2">
+                    <input type="hidden" name="laborId" value="<%= b.labor?._id %>">
+                    <span class="star-rating">
+                      <% for (let i = 5; i >= 1; i--) { %>
+                        <input type="radio" id="star-<%= b._id %>-<%= i %>" name="rating" value="<%= i %>" required>
+                        <label for="star-<%= b._id %>-<%= i %>"><i class="bi bi-star"></i></label>
+                      <% } %>
+                    </span>
+                    <button type="submit" class="btn btn-sm btn-success ms-1">Rate</button>
+                  </form>
+                  <style>
+                    .star-rating { display: inline-flex; flex-direction: row-reverse; }
+                    .star-rating input[type="radio"] {
+                      position: absolute;
+                      opacity: 0;
+                      width: 1px;
+                      height: 1px;
+                    }
+                    .star-rating label {
+                      color: #ccc;
+                      font-size: 1.2rem;
+                      cursor: pointer;
+                      transition: color 0.2s;
+                      margin: 0 1px;
+                      /* Remove background and border-radius */
+                      background: none;
+                      border-radius: 0;
+                      padding: 0;
+                    }
+                    .star-rating input[type="radio"]:checked ~ label,
+                    .star-rating label:hover,
+                    .star-rating label:hover ~ label {
+                      color: #ffc107;
+                      /* Add a golden glow inside the star */
+                      text-shadow: 0 0 6px #ffe066, 0 0 2px #ffc107;
+                    }
+                    /* Fill all stars up to the selected one with golden color only inside the icon */
+                    .star-rating input[type="radio"]:checked ~ label,
+                    .star-rating input[type="radio"]:checked ~ label ~ label {
+                      color: #ffc107;
+                      text-shadow: 0 0 6px #ffe066, 0 0 2px #ffc107;
+                    }
+                  </style>
+                <% } else if (b.status === 'Completed' && b.rated) { %>
+                  <span class="badge bg-success ms-2">Rated</span>
+                <% } %>
+              </td>
+            </tr>
+            <% }) %>
+        </tbody>
+      </table>
+      <% } %>
+
+        <%- include('../partials/footer') %>

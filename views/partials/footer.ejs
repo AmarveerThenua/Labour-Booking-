@@ -1,0 +1,22 @@
+</div> <!-- container end -->
+
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Socket.io client -->
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io();
+
+  const currentUserId = "<%= userId %>"; // Make sure you pass this in render
+
+  socket.on("bookingStatusChanged", (data) => {
+    if (data.userId === currentUserId) {
+      alert(`Booking updated: ${data.message}`);
+      location.reload(); // Or update part of the page
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<%- include('../partials/header') %>
+
+<h2 class="mb-4">Admin Panel</h2>
+
+<!-- Users Table -->
+<h4>Registered Users</h4>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Mobile</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% users.forEach(user => { %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.mobile %></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+<!-- Laborers Table -->
+<h4 class="mt-5">Labor Profiles</h4>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Mobile</th>
+      <th>Area</th>
+      <th>Skills</th>
+      <th>Availability</th>
+      <th>Wage</th>
+      <th>Experience</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% labors.forEach(labor => { %>
+      <tr>
+        <td><%= labor.user.name %></td>
+        <td><%= labor.user.mobile %></td>
+        <td><%= labor.area %></td>
+        <td><%= labor.skills %></td>
+        <td><%= labor.availability %></td>
+        <td>₹<%= labor.dailyWage %></td>
+        <td><%= labor.experience %></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+<%- include('../partials/footer') %>

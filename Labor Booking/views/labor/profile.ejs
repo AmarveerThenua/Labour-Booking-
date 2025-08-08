@@ -1,0 +1,21 @@
+<%- include('../partials/header') %>
+
+<h2 class="mb-4">My Profile</h2>
+
+<% if (labor) { %>
+  <div class="card p-4">
+    <p><strong>Name:</strong> <%= labor.user.name %></p>
+    <p><strong>Mobile:</strong> <%= labor.user.mobile %></p>
+    <p><strong>Area:</strong> <%= labor.area %></p>
+    <p><strong>Skills:</strong> <%= labor.skills %></p>
+    <p><strong>Availability:</strong> <%= labor.availability %></p>
+    <p><strong>Daily Wage:</strong> ₹<%= labor.dailyWage %></p>
+    <p><strong>Experience:</strong> <%= labor.experience %></p>
+
+    <a href="/labor/dashboard" class="btn btn-primary mt-3">Edit Profile</a>
+  </div>
+<% } else { %>
+  <p>No profile found. Please <a href="/labor/dashboard">create your profile</a>.</p>
+<% } %>
+
+<%- include('../partials/footer') %>

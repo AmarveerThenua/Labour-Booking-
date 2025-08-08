@@ -1,0 +1,8 @@
+.backHome {
+    display: flex;
+    justify-content: space-between;
+}
+.home {
+    position: relative;
+    bottom: 2px;
+}

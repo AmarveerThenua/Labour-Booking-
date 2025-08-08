@@ -1,0 +1,51 @@
+<%- include('../partials/header') %>
+
+<% if (success) { %>
+  <div class="alert alert-success">Request accepted successfully!</div>
+<% } %>
+
+<h2 class="mb-4">Booking Requests</h2>
+
+<% if (bookings.length === 0) { %>
+  <div class="alert alert-info">No booking requests at the moment.</div>
+<% } else { %>
+  <table class="table table-bordered table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>User Name</th>
+        <th>Mobile Number</th>
+        <th>Booking Date</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% bookings.forEach(b => { %>
+        <tr>
+          <td><%= b.user?.name || 'N/A' %></td>
+          <td><%= b.user?.mobile || 'N/A' %></td>
+          <td><%= b.date.toLocaleDateString() %></td>
+          <td>
+            <span class="badge bg-<%= b.status === 'Pending' ? 'warning' : b.status === 'Accepted' ? 'success' : 'danger' %>">
+              <%= b.status %>
+            </span>
+          </td>
+          <td>
+            <% if (b.status === 'Pending') { %>
+              <form method="POST" action="/labor/accept/<%= b._id %>" style="display:inline;">
+                <button type="submit" class="btn btn-sm btn-success">Accept</button>
+              </form>
+              <form method="POST" action="/labor/reject/<%= b._id %>" style="display:inline;">
+                <button type="submit" class="btn btn-sm btn-danger">Decline</button>
+              </form>
+            <% } else { %>
+              <em>No actions</em>
+            <% } %>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+<% } %>
+
+<%- include('../partials/footer') %>

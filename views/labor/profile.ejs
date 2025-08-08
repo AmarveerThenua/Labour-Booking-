@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Labor Booking</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+
+
+  <style>
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .profile-main-bg {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      padding: 40px 0;
+    }
+
+    .profile-card-modern {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.12);
+      padding: 36px 38px 32px 38px;
+      max-width: 760px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .profile-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: 32px;
+    }
+
+    .profile-img-modern {
+      width: 140px;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid #764ba2;
+      background: #f3f3f3;
+      position: relative;
+      box-shadow: 0 2px 12px rgba(118, 75, 162, 0.10);
+    }
+
+    .profile-img-upload {
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      background: #222;
+      color: #fff;
+      border-radius: 50%;
+      padding: 7px 8px 5px 8px;
+      cursor: pointer;
+      border: 2px solid #fff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+      font-size: 1.1rem;
+      transition: background 0.2s;
+    }
+
+    .profile-img-upload:hover {
+      background: #764ba2;
+    }
+
+    .profile-info-main {
+      flex: 1 1 320px;
+      margin-left: 0;
+      margin-top: 10px;
+    }
+
+    .profile-name-modern {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #764ba2;
+      margin-bottom: 2px;
+      margin-top: 8px;
+    }
+
+    .profile-location-modern {
+      color: #888;
+      font-size: 1.08rem;
+      margin-bottom: 10px;
+    }
+
+    .profile-edit-btn {
+      position: absolute;
+      top: 28px;
+      right: 38px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      padding: 8px 22px 8px 18px;
+      font-weight: 600;
+      font-size: 1.08rem;
+      box-shadow: 0 2px 8px rgba(118, 75, 162, 0.10);
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .profile-edit-btn:hover {
+      background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+      color: #fff;
+    }
+
+    .profile-details-table {
+      margin-top: 18px;
+      margin-bottom: 18px;
+      width: 100%;
+    }
+
+    .profile-details-table td {
+      padding: 7px 0 7px 0;
+      font-size: 1.08rem;
+      color: #333;
+      border: none;
+    }
+
+    .profile-details-table .label {
+      color: #888;
+      font-weight: 600;
+      width: 120px;
+      padding-right: 12px;
+    }
+
+    .profile-details-table .value {
+      color: #222;
+      font-weight: 500;
+    }
+
+    .profile-details-table .value strong {
+      color: #764ba2;
+      font-weight: 700;
+    }
+
+    .profile-stats-row {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      margin-top: 18px;
+      margin-bottom: 8px;
+    }
+
+    .profile-stat {
+      flex: 1 1 120px;
+      text-align: left;
+    }
+
+    .profile-bar-bg {
+      background: #e9ecef;
+      border-radius: 8px;
+      height: 8px;
+      width: 100%;
+      margin-bottom: 6px;
+      overflow: hidden;
+    }
+
+    .profile-bar-fill {
+      height: 100%;
+      border-radius: 8px;
+      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .profile-stat-label {
+      color: #888;
+      font-size: 0.95rem;
+      margin-top: 2px;
+    }
+
+    .profile-stat-value {
+      font-weight: 700;
+      color: #764ba2;
+      font-size: 1.1rem;
+      margin-left: 4px;
+    }
+
+    @media (max-width: 900px) {
+      .profile-card-modern {
+        padding: 18px 4vw 18px 4vw;
+      }
+
+      .profile-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;
+      }
+
+      .profile-edit-btn {
+        right: 18px;
+        top: 18px;
+      }
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark"
+    style="background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);">
+    <div class="container-fluid px-3">
+      <a class="navbar-brand text-decoration-none" href="/labor/home">
+        <i class="bi bi-tools me-1"></i>Dashboard
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav align-items-center">
+          <li class="nav-item">
+            <a class="nav-link" href="/labor/profile">
+              <i class="bi bi-person-circle me-1"></i>Profile
+            </a>
+          </li>
+          <!-- Desktop Profile Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              <% if (labor.profileImage) { %>
+                <img src="<%= labor.profileImage %>" alt="Profile" class="rounded-circle me-2"
+                  style="width: 32px; height: 32px; object-fit: cover;">
+                <% } else { %>
+                  <div class="rounded-circle me-2 d-flex align-items-center justify-content-center"
+                    style="width: 32px; height: 32px; background: rgba(255,255,255,0.2);">
+                    <i class="bi bi-person text-white" style="font-size: 0.9rem;"></i>
+                  </div>
+                  <% } %>
+                   
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <a class="dropdown-item" href="/labor/profile">
+                  <i class="bi bi-person-circle me-2"></i>Profile
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/labor/dashboard">
+                  <i class="bi bi-gear me-2"></i>Settings
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <a class="dropdown-item text-danger" href="/logout">
+                  <i class="bi bi-box-arrow-right me-2"></i>Logout
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="profile-main-bg">
+    <% if (labor) { %>
+      <div class="profile-card-modern">
+        <a href="/labor/dashboard" class="profile-edit-btn" title="Edit Profile">
+          <i class="bi bi-pencil-square"></i> EDIT
+        </a>
+        <div class="profile-row">
+          <div style="position: relative;">
+            <% if (labor.profileImage) { %>
+              <img src="<%= labor.profileImage %>" alt="Profile Image" class="profile-img-modern">
+              <% } else { %>
+                <div class="profile-img-modern d-flex align-items-center justify-content-center"
+                  style="background: #e9ecef;">
+                  <i class="bi bi-person" style="font-size: 3rem; color: #764ba2;"></i>
+                </div>
+                <% } %>
+                  
+          </div>
+          <div class="profile-info-main">
+            <div class="d-flex align-items-center mb-2">
+              <% if (averageRating && ratingCount> 0) { %>
+                <span style="font-size:1.3rem;color:#ffc107;">
+                  <% for (let i=1; i <=5; i++) { %>
+                    <i class="bi <%= i <= Math.round(averageRating) ? 'bi-star-fill' : 'bi-star' %>"></i>
+                    <% } %>
+                </span>
+                <span class="ms-2" style="color:#764ba2;font-weight:600;font-size:1.1rem;">
+                  <%= averageRating %> / 5
+                </span>
+                <span class="ms-2 text-muted" style="font-size:0.98rem;">(<%= ratingCount %> ratings)</span>
+                <% } else { %>
+                  <span class="text-muted" style="font-size:1.05rem;">No ratings yet</span>
+                  <% } %>
+            </div>
+            <div class="profile-name-modern">
+              <%= labor.user.name %>
+            </div>
+            <div class="profile-location-modern"><i class="bi bi-geo-alt me-1"></i>
+              <%= labor.area %>
+            </div>
+            <table class="profile-details-table">
+              <tr>
+                <td class="label">Mobile:</td>
+                <td class="value"><strong>
+                    <%= labor.user.mobile %>
+                  </strong></td>
+              </tr>
+              <tr>
+                <td class="label">Skills:</td>
+                <td class="value">
+                  <%= labor.skills %>
+                </td>
+              </tr>
+              <tr>
+                <td class="label">Availability:</td>
+                <td class="value">
+                  <span class="badge <%= labor.availability === 'Available' ? 'bg-success' : 'bg-danger' %>">
+                    <%= labor.availability %>
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td class="label">Daily Wage:</td>
+                <td class="value">₹<%= labor.dailyWage %>
+                </td>
+              </tr>
+              <tr>
+                <td class="label">Experience:</td>
+                <td class="value">
+                  <%= labor.experience %>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <hr style="margin: 18px 0 18px 0; border-top: 1.5px solid #eee;">
+        <div class="profile-stats-row">
+          <div class="profile-stat">
+            <div class="profile-bar-bg">
+              <div class="profile-bar-fill" style="width: 53%"></div>
+            </div>
+            <div class="profile-stat-label">YOUR RATING <span class="profile-stat-value">53%</span></div>
+          </div>
+          <div class="profile-stat">
+            <div class="profile-bar-bg">
+              <div class="profile-bar-fill" style="width: 90%"></div>
+            </div>
+            <div class="profile-stat-label">ACTIVITY <span class="profile-stat-value">90%</span></div>
+          </div>
+        </div>
+      </div>
+      <% } else { %>
+        <div class="profile-card-modern">
+          <p>No profile found. Please <a href="/labor/dashboard">create your profile</a>.</p>
+        </div>
+        <% } %>
+  </div>
+
+  <%- include('../partials/footer') %>

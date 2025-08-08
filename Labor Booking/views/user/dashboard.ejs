@@ -1,0 +1,44 @@
+<%- include('../partials/header') %>
+
+  <h2 class="mb-4">Available Laborers</h2>
+  <a href="/my-requests" class="btn btn-outline-info mb-3">View My Requests</a>
+  <div class="row">
+    <% labors.forEach(labor=> { %>
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">
+              <%= labor.user.name %>
+            </h5>
+            <p><strong>Area:</strong>
+              <%= labor.area %>
+            </p>
+            <p><strong>Skills:</strong>
+              <%= labor.skills %>
+            </p>
+            <p><strong>Mobile:</strong>
+              <%= labor.user.mobile %>
+            </p>
+            <p><strong>Availability:</strong> <span
+                class="badge bg-<%= labor.availability === 'Available' ? 'success' : 'secondary' %>">
+                <%= labor.availability %>
+              </span></p>
+            <p><strong>Daily Wage:</strong> ₹<%= labor.dailyWage %>
+            </p>
+            <p><strong>Experience:</strong>
+              <%= labor.experience %>
+            </p>
+          </div>
+
+          <% if (labor.availability==='Available' ) { %>
+            <a href="/book/<%= labor._id %>" class="btn btn-sm btn-primary">Book Now</a>
+            <% } else { %>
+              <button class="btn btn-sm btn-secondary" disabled>Not Available</button>
+              <% } %>
+
+        </div>
+      </div>
+      <% }) %>
+  </div>
+
+  <%- include('../partials/footer') %>
